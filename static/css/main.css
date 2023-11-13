@@ -1,0 +1,191 @@
+main > .container {
+    padding: 30px 15px 0;
+}
+
+a {
+    color: #194586;
+}
+
+.new_questions {
+    color: black;
+    text-decoration: none;
+}
+
+#navbar-search {
+    min-width: 350px;
+}
+
+#navbar-askme {
+    margin-left: 10px;
+}
+
+#navbar-user {
+    margin-right: 10px;
+    position: relative;
+    width: 15%;
+}
+
+#navbar-unknown {
+    position: relative;
+    margin-right: 20px;
+}
+
+#navbar-unknown > * {
+    color: #0c63e4;
+}
+
+#navbar-ask {
+    min-width: 70px;
+}
+
+.navbar-user-img {
+    height: 60px;
+    width: 60px;
+    border-radius: 20%;
+    display: inline-block;
+    object-fit: cover;
+}
+
+.navbar-user-info {
+    position: absolute;
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.navbar-user-control {
+    margin-top: 5px;
+}
+
+.question-row-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    margin-top: 10px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.wrong-password {
+    color: red;
+}
+
+.parent-like-counter {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.counter-text {
+    border: 1px solid black;
+    margin-left: 5px;
+    border-radius: 5px;
+    display: inline;
+    padding: 2px 7px 2px;
+}
+
+.main-link {
+    font-weight: bold
+}
+
+.main-link-inside {
+    color: black;
+    font-size: 28px;
+}
+
+.main-description {
+    font-size: 16px;
+}
+
+.like-counter {
+    display: inline;
+    margin-left: 5px;
+}
+
+.counter-svg {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 7px;
+}
+
+.dislike {
+    margin-left: 5px;
+}
+
+.question {
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.question-info {
+    padding-left: 25px;
+}
+
+.question-title {
+    font-size: 24px;
+    margin-top: 15px;
+}
+
+.question-description {
+    margin-top: 3px;
+    font-size: 15px;
+}
+
+.question-thread {
+    margin-bottom: 15px;
+}
+
+.new-question {
+    margin-top: 20px;
+}
+
+.mb-3 {
+    margin-top: 20px;
+}
+
+.question-comment {
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+#exampleFormControlTextarea1 {
+    border: 2px solid black;
+
+}
+
+#exampleFormControlTextarea1:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.pagination {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom:15px;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: #194586;
+    color: white;
+    border: 1px solid #194586;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+

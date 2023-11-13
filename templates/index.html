@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+    <script src="../static/js/bootstrap.js"></script>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/main.css" rel="stylesheet">
+    <title>index.html</title>
+
+</head>
+<body class="d-flex flex-column h-100">
+
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" id="navbar-askme">AskPupkin</a>
+            <form class="d-flex">
+                <input class="form-control me-2" id="navbar-search" type="search" placeholder="Search"
+                       aria-label="Search">
+                <button class="btn btn-outline-success" id="navbar-ask" type="submit">ASK!</button>
+            </form>
+            <div id="navbar-user">
+                <img class="navbar-user-img" src="../static/img/photo_2023-10-11_14-38-49.jpg" alt="avatar">
+                <div class="navbar-user-info">
+                    <p style="color: white; font-size: 14px; margin: 5px 0 0">Dr. Pepper</p>
+                    <div class="navbar-user-control">
+                        <a href="#" class="navbar-user-settings">settings</a>
+                        <a href="#" class="navbar-user-logout" style="margin-left: 10px">log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-7">
+                <div class="col-4" style="display: inline-block">
+                    <h2 class="new_questions">New Questions</h2>
+                </div>
+                <div class="col-3" style="display: inline-block; padding-left: 15px">
+                    <a href="#" class="hot_questions">Hot Questions</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-8">
+                <div class="row question">
+                    <div class="col-2" style="margin-top: 20px">
+                        <img class="question-row-img" src="../static/img/photo_2023-10-11_14-38-49.jpg"
+                             alt="question_img">
+                        <div style="width: 100%; height:50px; position: relative">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example"
+                                 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
+                                <button type="button" class="btn btn-outline-dark">+</button>
+                                <button type="button" class="btn btn-outline-dark" disabled>5</button>
+                                <button type="button" class="btn btn-outline-dark">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10 question-info">
+                        <div class="question-title"><a class="main-link" href="#">How to build a moon park?</a></div>
+                        <div class="question-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident.</p>
+                        </div>
+                        <div class="row question-action">
+                            <div class="col-3 question-thread">
+                                <a href="#">answer (3)</a>
+                            </div>
+
+                            <div class="col-9 question-tag">
+                                <p style="margin: 0">Tags: <a href="#">black-jack</a> <a href="#">bender</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row question">
+                    <div class="col-2" style="margin-top: 20px">
+                        <img class="question-row-img" src="../static/img/photo_2023-10-11_14-38-49.jpg"
+                             alt="question_img">
+                        <div style="width: 100%; height:50px; position: relative">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example"
+                                 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
+                                <button type="button" class="btn btn-outline-dark">+</button>
+                                <button type="button" class="btn btn-outline-dark" disabled>5</button>
+                                <button type="button" class="btn btn-outline-dark">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10 question-info">
+                        <div class="question-title"><a class="main-link" href="#">How to build a moon park?</a></div>
+                        <div class="question-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident.</p>
+                        </div>
+                        <div class="row question-action">
+                            <div class="col-3 question-thread">
+                                <a href="#">answer (3)</a>
+                            </div>
+
+                            <div class="col-9 question-tag">
+                                <p style="margin: 0">Tags: <a href="#">black-jack</a> <a href="#">bender</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row question">
+                    <div class="col-2" style="margin-top: 20px">
+                        <img class="question-row-img" src="../static/img/photo_2023-10-11_14-38-49.jpg"
+                             alt="question_img">
+                        <div style="width: 100%; height:50px; position: relative">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example"
+                                 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
+                                <button type="button" class="btn btn-outline-dark">+</button>
+                                <button type="button" class="btn btn-outline-dark" disabled>5</button>
+                                <button type="button" class="btn btn-outline-dark">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10 question-info">
+                        <div class="question-title"><a class="main-link" href="#">How to build a moon park?</a></div>
+                        <div class="question-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident.</p>
+                        </div>
+                        <div class="row question-action">
+                            <div class="col-3 question-thread">
+                                <a href="#">answer (3)</a>
+                            </div>
+
+                            <div class="col-9 question-tag">
+                                <p style="margin: 0">Tags: <a href="#">black-jack</a> <a href="#">bender</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="row" style="margin-left: 40px">
+                    <h3>Popular Tags</h3>
+                    <div class="tags">
+                        <span class="badge bg-primary">Python</span>
+                        <span class="badge bg-secondary">CSS</span>
+                        <span class="badge bg-success">HTML</span>
+                        <span class="badge bg-info">Django</span>
+                        <span class="badge bg-danger">JavaScript</span>
+                        <span class="badge bg-dark">Voloshin</span>
+                    </div>
+
+                    <br/>
+                    <h3 style="margin-top: 40px">Best Members</h3>
+                    <ul class="list-group" style="max-width: 200px; margin-left: 15px">
+                        <li class="list-group-item"><a href="#">An Item</a></li>
+                        <li class="list-group-item"><a href="#">An Item 1</a></li>
+                        <li class="list-group-item"><a href="#">An Item 234</a></li>
+                        <li class="list-group-item"><a href="#">John Wick</a></li>
+                        <li class="list-group-item"><a href="#">Booomb</a></li>
+                        <li class="list-group-item"><a href="#">Hairu Ihei</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">...</a>
+            <a href="#">52</a>
+        </div>
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <!--<span class="text-muted">Place sticky footer content here.</span>-->
+    </div>
+</footer>
+
+
+<script src="../static/js/bootstrap.js"></script>
+
+</body>
+</html>
