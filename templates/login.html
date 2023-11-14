@@ -1,114 +1,27 @@
-<!doctype html>
-<html lang="en" class="h-100">
-<head>
-    <link href="../static/css/bootstrap.css" rel="stylesheet">
-    <script src="../static/js/bootstrap.js"></script>
+{% extends 'layouts/base.html' %}
+{% load static %}
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
+{% block navbar %}
+    {% include 'components/navbar-unknown.html' %}
+{% endblock %}
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
+{% block content %}
+    <h2 class="new_questions" style="display: inherit">Log In </h2>
+    <p class="wrong-password">Sorry, wrong password!</p>
 
-
-    <!-- Custom styles for this template -->
-    <link href="../static/css/main.css" rel="stylesheet">
-    <title>login.html</title>
-
-</head>
-<body class="d-flex flex-column h-100">
-
-<header>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" id="navbar-askme">AskPupkin</a>
-            <form class="d-flex">
-                <input class="form-control me-2" id="navbar-search" type="search" placeholder="Search"
-                       aria-label="Search">
-                <button class="btn btn-outline-success" id="navbar-ask" type="submit">ASK!</button>
-            </form>
-            <div id="navbar-unknown">
-                <a href="#" class="navbar-log-in">log in</a>
-                <a href="#" class="navbar-log-in" style="margin-left: 15px">register</a>
-            </div>
+    <div class="mb-3 row" style="margin-top: 15px">
+        <label for="flogin" class="col-sm-2 col-form-label">Login</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="flogin"
+                   placeholder="Enter your login here">
         </div>
-    </nav>
-</header>
-
-<main class="flex-shrink-0">
-    <div class="container">
-        <div class="row" style="display: inline">
-            <h2 class="new_questions" style="display: inherit">Log In </h2>
-        </div>
-        <div class="row" style="margin-top: 15px">
-            <div class="col-8">
-
-                <p class="wrong-password">Sorry, wrong password!</p>
-
-                <div class="mb-3 row" style="margin-top: 15px">
-                    <label for="flogin" class="col-sm-2 col-form-label">Login</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="flogin" value="dr_pepper"
-                               placeholder="Enter your login here">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-6">
-                        <input type="password" class="form-control" id="inputPassword">
-                        <button type="button" class="btn btn-dark" style="margin-top: 30px">Log in!</button>
-                        <a href="#" style="margin-top: 25px; display: block">create new account</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="row" style="margin-left: 40px">
-                    <h3>Popular Tags</h3>
-                    <div class="tags">
-                        <span class="badge bg-primary">Python</span>
-                        <span class="badge bg-secondary">CSS</span>
-                        <span class="badge bg-success">HTML</span>
-                        <span class="badge bg-info">Django</span>
-                        <span class="badge bg-danger">JavaScript</span>
-                        <span class="badge bg-dark">Voloshin</span>
-                    </div>
-
-                    <br/>
-                    <h3 style="margin-top: 40px">Best Members</h3>
-                    <ul class="list-group" style="max-width: 200px; margin-left: 15px">
-                        <li class="list-group-item"><a href="#">An Item</a></li>
-                        <li class="list-group-item"><a href="#">An Item 1</a></li>
-                        <li class="list-group-item"><a href="#">An Item 234</a></li>
-                        <li class="list-group-item"><a href="#">John Wick</a></li>
-                        <li class="list-group-item"><a href="#">Booomb</a></li>
-                        <li class="list-group-item"><a href="#">Hairu Ihei</a></li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-
     </div>
-</main>
-
-<footer class="footer mt-auto py-3 bg-light">
-    <div class="container">
-        <!--<span class="text-muted">Place sticky footer content here.</span>-->
+    <div class="mb-3 row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-6">
+            <input type="password" class="form-control" placeholder="Enter your password here" id="inputPassword">
+            <button type="button" class="btn btn-dark" style="margin-top: 30px">Log in!</button>
+            <a href="{% url 'signup' %}" style="margin-top: 25px; display: block">create new account</a>
+        </div>
     </div>
-</footer>
-
-
-<script src="../static/js/bootstrap.js"></script>
-
-</body>
-</html>
+{% endblock %}

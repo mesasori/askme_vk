@@ -165,7 +165,6 @@ a {
 .pagination {
     display: inline-block;
     margin-top: 20px;
-    margin-bottom:15px;
 }
 
 .pagination a {
@@ -188,4 +187,27 @@ a {
     background-color: #ddd;
 }
 
+a.tag:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a.tag:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a.tag:hover {
+    color: blanchedalmond;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a.tag:active {
+    color: blanchedalmond;
+    background-color: transparent;
+    text-decoration: underline;
+}
 

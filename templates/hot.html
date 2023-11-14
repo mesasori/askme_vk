@@ -3,12 +3,12 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-9">
+         <div class="col-9">
             <div class="col-5" style="display: inline-block">
-                <h2 class="new_questions">New Questions</h2>
+                <h2 class="new_questions">Hot Questions</h2>
             </div>
             <div class="col-4" style="display: inline-block; padding-left: 15px">
-                <a href="{% url 'hot' %}" class="hot_questions">Hot Questions</a>
+                <a href="{% url 'index' %}" class="hot_questions">New Questions</a>
             </div>
         </div>
     </div>

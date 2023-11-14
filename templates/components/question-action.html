@@ -1,0 +1,6 @@
+{% load static %}
+<div class="col-3 question-thread">
+    <a href="{% url 'question' question_id=question.id %}">answer (3)</a>
+</div>
+
+{% include 'components/question-tags.html' %}
