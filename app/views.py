@@ -84,6 +84,10 @@ def ask(request):
     return render(request, 'ask.html')
 
 
+def settings(request):
+    return render(request, 'settings.html')
+
+
 def hot(request):
     arr_paginate = paginate(QUESTIONS, request)
     return render(request, 'hot.html', {'questions': arr_paginate[0]})

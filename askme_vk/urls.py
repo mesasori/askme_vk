@@ -25,5 +25,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('ask/', views.ask, name="ask"),
     path('hot/', views.hot, name='hot'),
-    path('tag/<selected_tag>', views.tag, name='tag')
+    path('tag/<selected_tag>', views.tag, name='tag'),
+    path('settings/', views.settings, name='settings')
 ]
