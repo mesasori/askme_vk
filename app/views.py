@@ -36,7 +36,11 @@ def paginate(objects, request, per_page=PER_PAGE):
     page = request.GET.get('page', 1)
     if int(page) > pages_count(len(objects)):
         page = 1
-    return [paginator.page(page), int(page)]
+
+    count = pages_count(len(objects))
+    paginator_items = get_paginator(int(page), count)
+
+    return [paginator.page(page), int(page), count, paginator_items]
 
 
 def pages_count(objects, per_page=PER_PAGE):
@@ -53,16 +57,14 @@ def get_paginator(current_page, count):
 def question(request, question_id):
     item = QUESTIONS[question_id]
     arr_paginate = paginate(ANSWERS, request)
-    count = pages_count(len(ANSWERS))
-    current_page = arr_paginate[1]
-    paginator_items = get_paginator(current_page, count)
+
     return render(request, 'question.html',
                   {
                       'question': item,
                       'answers': arr_paginate[0],
-                      'current_page': current_page,
-                      'pages_count': count,
-                      'paginator': paginator_items})
+                      'current_page': arr_paginate[1],
+                      'pages_count': arr_paginate[2],
+                      'paginator': arr_paginate[3]})
 
 
 def login(request):
@@ -78,20 +80,19 @@ def ask(request):
 
 
 def hot(request):
-    return render(request, 'hot.html', {'questions': paginate(QUESTIONS, request)})
+    arr_paginate = paginate(QUESTIONS, request)
+    return render(request, 'hot.html', {'questions': arr_paginate[0]})
 
 
 def index(request):
     arr_paginate = paginate(QUESTIONS, request)
-    count = pages_count(len(QUESTIONS))
-    current_page = arr_paginate[1]
-    paginator_items = get_paginator(current_page, count)
+
     return render(request, 'index.html',
                   {
                       'questions': arr_paginate[0],
-                      'current_page': current_page,
-                      'pages_count': count,
-                      'paginator': paginator_items
+                      'current_page': arr_paginate[1],
+                      'pages_count': arr_paginate[2],
+                      'paginator': arr_paginate[3]
                   })
 
 
@@ -101,15 +102,12 @@ def tag(request, selected_tag):
         if selected_tag in item['tag']:
             questions_list.append(item)
 
-    count = pages_count(len(questions_list))
     arr_paginate = paginate(questions_list, request)
-    current_page = arr_paginate[1]
-    paginator_items = get_paginator(current_page, count)
     return render(request, 'tag.html',
                   {
-                      'questions': paginate(questions_list, request)[0],
+                      'questions': arr_paginate[0],
                       'selected_tag': selected_tag,
-                      'current_page': current_page,
-                      'pages_count': count,
-                      'paginator': paginator_items}
+                      'current_page': arr_paginate[1],
+                      'pages_count': arr_paginate[2],
+                      'paginator': arr_paginate[3]}
                   )
