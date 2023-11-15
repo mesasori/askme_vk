@@ -33,10 +33,16 @@ ANSWERS = [
 
 def paginate(objects, request, per_page=PER_PAGE):
     paginator = Paginator(objects, per_page)
-    page = request.GET.get('page', 1)
-
-
+    page: object = request.GET.get('page', 1)
     count = pages_count(len(objects))
+    try:
+        if int(page) <= 0:
+            page = 1
+        elif int(page) > count:
+            page = count
+    except:
+        page = 1
+
     paginator_items = get_paginator(int(page), count)
 
     return [paginator.page(page), int(page), count, paginator_items]
