@@ -1,0 +1,26 @@
+<div class="pagination">
+    {% if current_page != 1 %}
+        <a class="page-link" href="?page={{ current_page|add:-1 }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    {% endif %}
+
+    {% if current_page > 5 %}
+        <a>...</a>
+    {% endif %}
+
+    {% for i in paginator %}
+        <a href="?page={{ i }}"
+           {% if i == current_page %}style="background: #194586; color: white"{% endif %}>{{ i }}</a>
+    {% endfor %}
+
+    {% if current_page < pages_count|add:-4 %}
+        <a>...</a>
+    {% endif %}
+
+    {% if current_page != pages_count %}
+        <a class="page-link" href="?page={{ current_page|add:1 }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    {% endif %}
+</div>
