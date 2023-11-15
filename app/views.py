@@ -34,8 +34,7 @@ ANSWERS = [
 def paginate(objects, request, per_page=PER_PAGE):
     paginator = Paginator(objects, per_page)
     page = request.GET.get('page', 1)
-    if int(page) > pages_count(len(objects)):
-        page = 1
+
 
     count = pages_count(len(objects))
     paginator_items = get_paginator(int(page), count)
