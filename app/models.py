@@ -6,16 +6,16 @@ class Question(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     upload_date = models.DateTimeField(auto_now_add=True)
-    user_id = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    user = models.ForeignKey('Profile', on_delete=models.DO_NOTHING)
     like = models.IntegerField()
-    tags = models.ManyToManyField('Tag')
+    tags = models.ManyToManyField('Tag', related_name='questions')
 
 
 class Answer(models.Model):
     content = models.TextField()
     valid = models.BooleanField()
-    question_id = models.ForeignKey('Question', on_delete=models.CASCADE)
-    user_id = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    question = models.ForeignKey('Question', on_delete=models.CASCADE)
+    user = models.ForeignKey('Profile', on_delete=models.DO_NOTHING)
     like = models.IntegerField()
 
 
@@ -28,6 +28,11 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
-class Like(models.Model):
-    question_id = models.ForeignKey('Question', on_delete=models.CASCADE, related_name='+')
-    answer_id = models.ForeignKey('Answer', on_delete=models.CASCADE, related_name='+')
+class QuestionLike(models.Model):
+    question = models.ForeignKey('Question', on_delete=models.DO_NOTHING)
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+
+
+class AnswerLike(models.Model):
+    answer = models.ForeignKey('Answer', on_delete=models.DO_NOTHING)
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
