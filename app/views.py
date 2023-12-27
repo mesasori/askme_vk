@@ -1,71 +1,37 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-import math
+from app import models
 
 PER_PAGE = 10
-
-QUESTIONS = [
-    {
-        'id': i,
-        'title': f'Question {i}',
-        'content': f'Long lorem ipsum {i}',
-        'like': i + 1,
-        'tag': []
-    } for i in range(1000)
-]
-
-for i in range(1000):
-    if i % 2 == 0:
-        QUESTIONS[i]['tag'] = ['CSS', 'HTML']
-    else:
-        QUESTIONS[i]['tag'] = ['Python', 'Django']
-    if i % 3 == 0:
-        QUESTIONS[i]['tag'] = ['JavaScript', 'Voloshin', 'bender']
-
-ANSWERS = [
-    {
-        'id': i,
-        'content': f'Long lorem ipsum long lorem ipsum long lorem ipsum {i}',
-        'like': i + 1
-    } for i in range(1000)
-]
 
 
 def paginate(objects, request, per_page=PER_PAGE):
     paginator = Paginator(objects, per_page)
-    page: object = request.GET.get('page', 1)
-    count = pages_count(len(objects))
+    page = int(request.GET.get('page', 1))
+    count = paginator.num_pages
+
     try:
-        if int(page) <= 0:
+        if page <= 0:
             page = 1
-        elif int(page) > count:
+        elif page > count:
             page = count
     except:
         page = 1
 
-    paginator_items = get_paginator(int(page), count)
+    paginator_elements = [i for i in range(max(page - 4, 2), min(page + 4, count) + 1)]
 
-    return [paginator.page(page), int(page), count, paginator_items]
-
-
-def pages_count(objects, per_page=PER_PAGE):
-    return math.ceil(objects / per_page)
-
-
-def get_paginator(current_page, count):
-    start_page = max(current_page - 4, 1)
-    end_page = min(current_page + 4, count)
-    arr = [i for i in range(start_page, end_page + 1)]
-    return arr
+    return [paginator.page(page), page, count, paginator_elements]
 
 
 def question(request, question_id):
-    item = QUESTIONS[question_id]
-    arr_paginate = paginate(ANSWERS, request)
+    question_item = models.Question.objects.get_by_id(question_id)
+    arr_paginate = paginate(
+        models.Answer.objects.get_by_question(question_id),
+        request)
 
     return render(request, 'question.html',
                   {
-                      'question': item,
+                      'question': question_item,
                       'answers': arr_paginate[0],
                       'current_page': arr_paginate[1],
                       'pages_count': arr_paginate[2],
@@ -89,12 +55,22 @@ def settings(request):
 
 
 def hot(request):
-    arr_paginate = paginate(QUESTIONS, request)
-    return render(request, 'hot.html', {'questions': arr_paginate[0]})
+    arr_paginate = paginate(
+        models.Question.objects.get_hot(),
+        request)
+    return render(request, 'hot.html',
+                  {
+                      'questions': arr_paginate[0],
+                      'current_page': arr_paginate[1],
+                      'pages_count': arr_paginate[2],
+                      'paginator': arr_paginate[3]
+                  })
 
 
 def index(request):
-    arr_paginate = paginate(QUESTIONS, request)
+    arr_paginate = paginate(
+        models.Question.objects.get_new(),
+        request)
 
     return render(request, 'index.html',
                   {
@@ -105,17 +81,14 @@ def index(request):
                   })
 
 
-def tag(request, selected_tag):
-    questions_list = []
-    for item in QUESTIONS:
-        if selected_tag in item['tag']:
-            questions_list.append(item)
-
-    arr_paginate = paginate(questions_list, request)
+def tag(request, tag_title):
+    arr_paginate = paginate(
+        models.Question.objects.get_by_tag(tag_title),
+        request)
     return render(request, 'tag.html',
                   {
                       'questions': arr_paginate[0],
-                      'selected_tag': selected_tag,
+                      'selected_tag': tag_title,
                       'current_page': arr_paginate[1],
                       'pages_count': arr_paginate[2],
                       'paginator': arr_paginate[3]}

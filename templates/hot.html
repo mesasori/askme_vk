@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="row">
-         <div class="col-9">
+        <div class="col-9">
             <div class="col-5" style="display: inline-block">
                 <h2 class="new_questions">Hot Questions</h2>
             </div>
@@ -16,12 +16,6 @@
     {% for question in questions %}
         {% include 'components/question-item.html' %}
     {% endfor %}
-    <div class="pagination">
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">...</a>
-        <a href="#">52</a>
-    </div>
+    {% include 'components/pagination.html' %}
 {% endblock %}
 
