@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.db.models.functions import Length
 
 
+def fill_db():
+    pass
+
+
 class QuestionManager(models.Manager):
     def get_new(self):
         return self.order_by('-upload_date')
@@ -11,7 +15,7 @@ class QuestionManager(models.Manager):
         return self.order_by('-like')
 
     def get_all(self):
-        return self
+        return self.order_by()
 
     def get_by_id(self, question_id):
         return self.get(id=question_id)
