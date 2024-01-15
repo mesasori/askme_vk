@@ -1,6 +1,8 @@
 {% load static %}
+{% load custom_filters %}
+
 <div class="col-3 question-thread">
-    <a href="{% url 'question' question_id=question.id %}">answer (3)</a>
+    <a href="{% url 'question' question_id=question.id %}">answer ({{ answers|get_answers_count:question.id }})</a>
 </div>
 
 {% include 'components/question-tags.html' %}

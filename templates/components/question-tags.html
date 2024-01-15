@@ -1,8 +1,8 @@
 {% load static %}
 <div class="col-9 question-tag">
     <p style="margin: 0">Tags:
-        {% for tag in question.tag %}
-            <a href="{% url 'tag' selected_tag=tag %}">{{ tag }}</a>
+        {% for tag in question.tags.all  %}
+            <a href="{% url 'tag' selected_tag=tag.title %}">{{ tag.title }}</a>
         {% endfor %}
     </p>
 </div>

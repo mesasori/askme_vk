@@ -67,13 +67,9 @@
                 <div class="row" style="margin-left: 40px">
                     <h3>Popular Tags</h3>
                     <div class="tags">
-                        <span class="badge bg-primary"><a class="a tag" href="{% url 'tag' selected_tag='Python' %}">Python</a></span>
-                        <span class="badge bg-secondary"><a class="a tag" href="{% url 'tag' selected_tag='CSS' %}">CSS</a></span>
-                        <span class="badge bg-success"><a class="a tag" href="{% url 'tag' selected_tag='HTML' %}">HTML</a></span>
-                        <span class="badge bg-info"><a class="a tag" href="{% url 'tag' selected_tag='Django' %}">Django</a></span>
-                        <span class="badge bg-danger"><a class="a tag" href="{% url 'tag' selected_tag='JavaScript' %}">JavaScript</a></span>
-                        <span class="badge bg-dark"><a class="a tag" href="{% url 'tag' selected_tag='Voloshin' %}">Voloshin</a></span>
-                        <span class="badge bg-warning"><a class="a tag" href="{% url 'tag' selected_tag='bender' %}">bender</a></span>
+                        {% for tag in tags %}
+                        <span class="badge bg-primary"><a class="a tag" href="{% url 'tag' selected_tag=tag.title %}">{{ tag.title }}</a></span>
+                        {% endfor %}
                     </div>
 
                     <br/>

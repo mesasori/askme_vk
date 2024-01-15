@@ -2,7 +2,7 @@
 
 <div class="row question">
         <div class="col-2" style="margin-top: 10px">
-            <img class="question-row-img" src="{% static '/img/photo_2023-10-11_14-38-49.jpg' %}"
+            <img class="question-row-img" src="{{ answer.user.photo.url }}"
                  alt="question_img">
             <div style="width: 100%; height:50px; position: relative">
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example"

@@ -1,10 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.functions import Length
-
-
-def fill_db():
-    pass
 
 
 class QuestionManager(models.Manager):
@@ -56,8 +51,18 @@ class Answer(models.Model):
     objects = AnswerManager()
 
 
+class TagManager(models.Manager):
+    def get_popular(self):
+        return self.order_by()[:10]
+
+    def get_by_question(self, question):
+        return self.filter(questions=question)
+
+
 class Tag(models.Model):
     title = models.CharField(max_length=255)
+
+    objects = TagManager()
 
     def __str__(self):
         return self.title
