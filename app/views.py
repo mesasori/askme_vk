@@ -63,9 +63,14 @@ def hot(request):
         models.Question.objects.get_hot(),
         request)
 
+    answers = {}
+    for question in arr_paginate[0]:
+        answers[question.id] = models.Answer.objects.get_by_question(question.id).count()
+
     context = {
         'questions': arr_paginate[0],
         'tags': models.Tag.objects.get_popular(),
+        'answers': answers,
         'current_page': arr_paginate[1],
         'pages_count': arr_paginate[2],
         'paginator': arr_paginate[3]
@@ -75,13 +80,12 @@ def hot(request):
 
 
 def index(request):
-    questions = models.Question.objects.get_new()
     arr_paginate = paginate(
-        questions,
+        models.Question.objects.get_new(),
         request)
 
     answers = {}
-    for question in questions:
+    for question in arr_paginate[0]:
         answers[question.id] = models.Answer.objects.get_by_question(question.id).count()
 
     context = {

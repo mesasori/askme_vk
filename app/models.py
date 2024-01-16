@@ -44,6 +44,7 @@ class AnswerManager(models.Manager):
 class Answer(models.Model):
     content = models.TextField()
     valid = models.BooleanField()
+    upload_date = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
     user = models.ForeignKey('Profile', on_delete=models.DO_NOTHING)
     like = models.IntegerField()
@@ -77,10 +78,12 @@ class Profile(models.Model):
 
 
 class QuestionLike(models.Model):
-    question = models.ForeignKey('Question', on_delete=models.DO_NOTHING)
     user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    is_like = models.BooleanField(default=True)
+    question = models.ForeignKey('Question', on_delete=models.DO_NOTHING)
 
 
 class AnswerLike(models.Model):
-    answer = models.ForeignKey('Answer', on_delete=models.DO_NOTHING)
     user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    is_like = models.BooleanField(default=True)
+    answer = models.ForeignKey('Answer', on_delete=models.DO_NOTHING)
