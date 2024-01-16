@@ -63,9 +63,7 @@ def hot(request):
         models.Question.objects.get_hot(),
         request)
 
-    answers = {}
-    for question in arr_paginate[0]:
-        answers[question.id] = models.Answer.objects.get_by_question(question.id).count()
+    answers = models.Answer.objects.get_count_by_questions(arr_paginate[0])
 
     context = {
         'questions': arr_paginate[0],
@@ -84,9 +82,7 @@ def index(request):
         models.Question.objects.get_new(),
         request)
 
-    answers = {}
-    for question in arr_paginate[0]:
-        answers[question.id] = models.Answer.objects.get_by_question(question.id).count()
+    answers = models.Answer.objects.get_count_by_questions(arr_paginate[0])
 
     context = {
         'questions': arr_paginate[0],

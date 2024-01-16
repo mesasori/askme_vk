@@ -40,6 +40,12 @@ class AnswerManager(models.Manager):
     def get_by_question(self, question_id):
         return self.filter(question_id=question_id)
 
+    def get_count_by_questions(self, questions):
+        answers = {}
+        for question in questions:
+            answers[question.id] = self.filter(question_id=question.id).count()
+        return answers
+
 
 class Answer(models.Model):
     content = models.TextField()

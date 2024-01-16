@@ -1,5 +1,3 @@
-# app/management/commands/fill_db.py
-
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from app.models import Profile, Tag, Question, Answer, QuestionLike, AnswerLike
@@ -89,7 +87,7 @@ class Command(BaseCommand):
         answerLikes = []
         questionLikes = []
         weights = []
-        for i in range(likes_count):
+        for i in range(likes_count//2):
             if random.choice([0, 1]) == 1:
                 weights = [0.7, 0.3]
             else:
@@ -113,16 +111,17 @@ class Command(BaseCommand):
                 questions[needed_index].like = questions[needed_index].like + 1
             else:
                 questions[needed_index].like = questions[needed_index].like - 1
-            questions[needed_index].save()
 
             needed_index = answers.index(answerLike.answer)
             if answerLike.is_like:
                 answers[needed_index].like = answers[needed_index].like + 1
             else:
                 answers[needed_index].like = answers[needed_index].like - 1
-            answers[needed_index].save()
 
         QuestionLike.objects.bulk_create(questionLikes)
         AnswerLike.objects.bulk_create(answerLikes)
+
+        Question.objects.bulk_update(questions, ['like'])
+        Answer.objects.bulk_update(answers, ['like'])
 
         self.stdout.write(self.style.SUCCESS(f'Likes filled'))
