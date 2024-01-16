@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from app import models
@@ -113,3 +114,7 @@ def tag(request, selected_tag):
     }
 
     return render(request, 'tag.html', context=context)
+
+
+def page_404(req, exc):
+    return HttpResponseNotFound('<h1> Page not found :( </h1>')
