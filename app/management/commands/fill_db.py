@@ -1,3 +1,6 @@
+from datetime import datetime
+
+from django.db import transaction
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from app.models import Profile, Tag, Question, Answer, QuestionLike, AnswerLike
@@ -21,6 +24,8 @@ class Command(BaseCommand):
         tags_count = ratio
         likes_count = ratio * 200
 
+
+
         # Create Users
         users = []
         for i in range(users_count):
@@ -28,7 +33,7 @@ class Command(BaseCommand):
             user = User.objects.create_user(username=username)
             users.append(user)
 
-        self.stdout.write("Users filled\n")
+        self.stdout.write(f'Users filled. Time:{datetime.now().strftime("%H:%M:%S")}\n')
 
         # Create Profiles
         # Avatars
@@ -42,7 +47,7 @@ class Command(BaseCommand):
             profiles.append(Profile(user=user, photo=photo))
 
         Profile.objects.bulk_create(profiles)
-        self.stdout.write("Profiles filled\n")
+        self.stdout.write(f'Profiles filled. Time:{datetime.now().strftime("%H:%M:%S")}\n')
 
         # Create Tags
         tags = []
@@ -51,7 +56,7 @@ class Command(BaseCommand):
             tags.append(tag)
 
         Tag.objects.bulk_create(tags)
-        self.stdout.write("Tags filled\n")
+        self.stdout.write(f'Tags filled. Time:{datetime.now().strftime("%H:%M:%S")}\n')
 
         # Create Questions
         questions = []
@@ -65,12 +70,15 @@ class Command(BaseCommand):
             )
             question.tags.set(random.sample(tags, random.randint(1, 4)))
             questions.append(question)
+            if i == question_count // 2:
+                self.stdout.write(f'50% of Questions. Time:{datetime.now().strftime("%H:%M:%S")}\n')
 
-        self.stdout.write("Questions filled\n")
+        self.stdout.write(f'Questions 100% filled. Time:{datetime.now().strftime("%H:%M:%S")}\n')
 
         # Create Answers
-        answers = [
-            Answer(
+        answers = []
+        for i in range(answers_count):
+            answer = Answer(
                 content=faker.text()[:300],
                 upload_date=faker.date_time_this_decade(),
                 valid=random.choice([True, False]),
@@ -78,50 +86,63 @@ class Command(BaseCommand):
                 user=random.choice(profiles),
                 like=0,
             )
-            for i in range(answers_count)
-        ]
+            answers.append(answer)
+            if i == answers_count // 2:
+                self.stdout.write(f'Answers 50%. Time:{datetime.now().strftime("%H:%M:%S")}\n')
+
         Answer.objects.bulk_create(answers)
-        self.stdout.write("Answers filled\n")
+        self.stdout.write(f'Answers filled 100%. Time:{datetime.now().strftime("%H:%M:%S")}\n')
 
         # Create Likes
         answerLikes = []
         questionLikes = []
         weights = []
-        for i in range(likes_count//2):
+        for i in range(likes_count // 2):
             if random.choice([0, 1]) == 1:
                 weights = [0.7, 0.3]
             else:
                 weights = [0.3, 0.7]
+            question_index = random.randint(0, len(questions) - 1)
+            answer_index = random.randint(0, len(answers) - 1)
 
             questionLike = QuestionLike(
-                question=random.choice(questions),
+                question=questions[question_index],
                 user=random.choice(profiles),
                 is_like=random.choices([True, False], weights)[0]
             )
             answerLike = AnswerLike(
-                answer=random.choice(answers),
+                answer=answers[answer_index],
                 user=random.choice(profiles),
                 is_like=random.choices([True, False], weights)[0]
             )
             questionLikes.append(questionLike)
             answerLikes.append(answerLike)
 
-            needed_index = questions.index(questionLike.question)
             if questionLike.is_like:
-                questions[needed_index].like = questions[needed_index].like + 1
+                questions[question_index].like = questions[question_index].like + 1
             else:
-                questions[needed_index].like = questions[needed_index].like - 1
+                questions[question_index].like = questions[question_index].like - 1
 
-            needed_index = answers.index(answerLike.answer)
             if answerLike.is_like:
-                answers[needed_index].like = answers[needed_index].like + 1
+                answers[answer_index].like = answers[answer_index].like + 1
             else:
-                answers[needed_index].like = answers[needed_index].like - 1
+                answers[answer_index].like = answers[answer_index].like - 1
+
+            if i == likes_count // 4:
+                self.stdout.write(f'Like filled 50% Time:{datetime.now().strftime("%H:%M:%S")}\n')
 
         QuestionLike.objects.bulk_create(questionLikes)
         AnswerLike.objects.bulk_create(answerLikes)
 
-        Question.objects.bulk_update(questions, ['like'])
-        Answer.objects.bulk_update(answers, ['like'])
+        self.stdout.write(f'Likes bulked. Time:{datetime.now().strftime("%H:%M:%S")}\n')
 
-        self.stdout.write(self.style.SUCCESS(f'Likes filled'))
+        with transaction.atomic():
+            for question in questions:
+                Question.objects.filter(id=question.id).update(like=question.like)
+
+            self.stdout.write(f'Questions are updated. Time:{datetime.now().strftime("%H:%M:%S")}\n')
+
+            for answer in answers:
+                Answer.objects.filter(id=answer.id).update(like=answer.like)
+
+        self.stdout.write(self.style.SUCCESS(f'Finish. Time:{datetime.now().strftime("%H:%M:%S")}\n'))

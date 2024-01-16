@@ -7,7 +7,7 @@ PER_PAGE = 20
 
 
 def paginate(objects, request, per_page=PER_PAGE):
-    paginator = Paginator(objects, per_page)
+    paginator = Paginator(list(objects), per_page)
     page = int(request.GET.get('page', 1))
     count = paginator.num_pages
 
