@@ -104,10 +104,13 @@ def tag(request, selected_tag):
         questions,
         request)
 
+    answers = models.Answer.objects.get_count_by_questions(arr_paginate[0])
+
     context = {
         'questions': arr_paginate[0],
         'selected_tag': selected_tag,
         'tags': models.Tag.objects.get_popular(),
+        'answers': answers,
         'current_page': arr_paginate[1],
         'pages_count': arr_paginate[2],
         'paginator': arr_paginate[3]
